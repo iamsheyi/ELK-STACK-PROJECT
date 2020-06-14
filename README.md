@@ -48,9 +48,19 @@ Health probes: this helps load balancer to detect failure of an application adde
 Load balancing ensures that the application will be highly available, in addition to restricting traffic to the network.
 Load balancer is an application that helps to efficiently distribute incoming traffic across all the backend servers. This backend server is also known as backend pool. Load balancer is also used to manage traffic across a region. This helps the organization to defend against distributed denial-of-service (DDoS) attack by rerouting heavy traffic from one server to another to eliminate single points of failure, reduce attack surface thereby making it harder for resources and saturate links exhaustion. 
 
-Jump box serves as a gateway that allows all traffic to pass through it. This helps to secure and monitor the packets going into the VMs. This is achieved through the use of SSH port (22) to allow all traffic go through the Jump-Box. The jump box helps to prevent the exposure of VMs to the public from direct access.  
+**Jump-Box
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the infrastructure and system logs.
+Jump box serves as a gateway that allows all traffic to pass through it. This helps to secure and monitor the packets going into the VMs. This is achieved through the use of SSH port (22) to allow all traffic go through the Jump-Box. The jump box helps to prevent the exposure of VMs to the public from direct access.
+
+The Jump Box is set up just like a virtual machine but the inbound policies which allows or blocks specific traffic are set. 
+
+1. The public key was generated using the command "ssh-keygen" and the generated public key was later cat out using the command "cat ~/.ssh/id_rsa.pub". 
+
+2. The inbound rules for traffic are created using the security group settings to either allow or block traffic from a specific port or IP address.
+
+3. The public IP address was used to SSH to the terminal in order to create a gateway for the VMs
+
+	Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the infrastructure and system logs.
 Filebeat monitors log files from the location that's been specified, collect these logs events and forwards the logs to elasticsearch or logstash for indexing
 Metricbeat is installed on the server to periodically collect metric and statistics from operating system and all the services running on the server and ship to output (elasticsearch or logstash)
 
@@ -252,22 +262,22 @@ Create another Ansible playbook that accomplishes the Linux Filebeat installatio
 
 Install the .deb file using the dpkg command:
     dpkg -i filebeat-7.7.1-amd64.deb
-     
-    
-    Copy the Filebeat configuration file from your Ansible container to your Webserver VM 
-    
-    You can use the Ansible module copy to copy the entire configuration file into the correct place
-    
-    You will need to place the configuration file in a directory called files in your Ansible directory
-    
-    Run the command filebeat modules enable system to enable and configure system module
-    
-    Run the command filebeat setup to setup filebeat
-    
-    Run the command service filebeat start to start filebeat service
-    
-    Run the command ansible-playbook /etc/ansible/files/filebeat-playbook.yml to deploy the filebeat to the DVWA-VM1 and DVWA-VM2
- 
+
+Copy the filebeat configuration file from your ansible container to your webserver VMs
+
+You can use the ansible module to copy the entire configuration file into the correct place
+
+The configuration file was placed in filebeat directory
+
+Run the command "filebeat modules enable system" to enable and configure system module
+
+Run the command "filebeat setup" to setup filebeat
+
+Run the command "service filebeat start" to start the filebeat service
+
+Run the command "ansible-playbook /etc/ansible/filebeat/filebeat-playbook.yml" to deploy the filebeat to DVWA-VM1 and DVWA-VM2
+
+  
 4. Verifying Installation and Playbook
 
 We need to confirm that the ELK server is receiving logs from the webservers.
@@ -324,22 +334,21 @@ Create another Ansible playbook that accomplishes the Linux metricbeat installat
   curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.7.1-amd64.deb 
 
 Install the .deb file using the dpkg command:  dpkg -i metricbeat-7.7.1-amd64.deb
-    
-    
-    Copy the metricbeat configuration file from your Ansible container to your Webserver VM
-    
-    You can use the Ansible module copy to copy the entire configuration file into the correct place
-    
-    You will need to place the configuration file in a directory called files in your Ansible directory
-    
-    Run the command metricbeat modules enable system to enable and configure system module
-    
-    Run the command metricbeat setup to setup filebeat
-    
-    Run the command service filebeat start to start filebeat service
-    
-    Run the command ansible-playbook /etc/ansible/files/metricbeat-playbook.yml to deploy the metricbeat to the DVWA-VM1, DVWA-VM2 and DVWA-VM4
- 
+
+Copy the filebeat configuration file from your ansible container to your webserver VMs
+
+You can use the ansible module to copy the entire configuration file into the correct place
+
+The configuration file was placed in filebeat directory
+
+Run the command "filebeat modules enable system" to enable and configure system module
+
+Run the command "filebeat setup" to setup filebeat
+
+Run the command "service filebeat start" to start the filebeat service
+
+Run the command "ansible-playbook /etc/ansible/filebeat/filebeat-playbook.yml" to deploy the filebeat to DVWA-VM1 and DVWA-VM2
+
 4. Verifying Installation and Playbook
 
 We need to confirm that the ELK server is receiving logs from the webservers.
