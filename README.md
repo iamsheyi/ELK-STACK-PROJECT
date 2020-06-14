@@ -254,16 +254,16 @@ After making these editions, save the file in /etc/ansible/files/filebeat-config
 
 3. Create a filebeat installation playbook
 
-Create another Ansible playbook that accomplishes the Linux Filebeat installation instructions
+a. Create another Ansible playbook that accomplishes the Linux Filebeat installation instructions
   
-  The playbook should: Download the filebeat.deb file using this link 
+b. Download the filebeat.deb file using this link 
   
   curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.7.1-amd64.deb
 
-Install the .deb file using the dpkg command:
+  Install the .deb file using the dpkg command:
     dpkg -i filebeat-7.7.1-amd64.deb
 
-	Copy the filebeat configuration file from your ansible container to your webserver VMs
+c.Copy the filebeat configuration file from the ansible container to the webserver VMs
 
 	The ansible module provided was used as template to setup the entire configuration file
 
@@ -275,7 +275,7 @@ Install the .deb file using the dpkg command:
 
 	Run the command "service filebeat start" to start the filebeat service
 
-	Run the command "ansible-playbook /etc/ansible/filebeat/filebeat-playbook.yml" to deploy the filebeat to DVWA-VM1 and DVWA-VM2
+d. Run the command "ansible-playbook /etc/ansible/filebeat/filebeat-playbook.yml" to deploy the filebeat to DVWA-VM1 and DVWA-VM2
 
 4. Verifying Installation and Playbook
 
@@ -322,19 +322,19 @@ Make sure the metricbeat configuration file is edited to match the provided temp
 
 ![](Images/metricbeat%20configuration-kibana.png)
 
-After making these editions, save the file in /etc/ansible/files/metricbeat-configuration.yml
+After making these editions, save the file in /etc/ansible/metricbeat/metricbeat-configuration.yml
 
 3. Create a metricbeat installation play
 
-Create another Ansible playbook that accomplishes the Linux metricbeat installation instructions
+a. Create another Ansible playbook that accomplishes the Linux metricbeat installation instructions
   
-  The playbook should:Download the metricbeat.deb file by using this link 
+b. Download the metricbeat.deb file by using this link 
   
   curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.7.1-amd64.deb 
 
-Install the .deb file using the dpkg command:  dpkg -i metricbeat-7.7.1-amd64.deb
+  Install the .deb file using the dpkg command:  dpkg -i metricbeat-7.7.1-amd64.deb
 
-	Copy the metricbeat configuration file from your ansible container to your webserver VMs
+c. Copy the metricbeat configuration file from the ansible container to the webserver VMs
 
 	The ansible module provided was used as template to setup the entire configuration file
 
@@ -346,7 +346,7 @@ Install the .deb file using the dpkg command:  dpkg -i metricbeat-7.7.1-amd64.de
 
 	Run the command "service metricbeat start" to start the filebeat service
 
-	Run the command "ansible-playbook /etc/ansible/metricbeat/metricbeat-playbook.yml" to deploy the filebeat to DVWA-VM1 and DVWA-VM2
+d. Run the command "ansible-playbook /etc/ansible/metricbeat/metricbeat-playbook.yml" to deploy the filebeat to DVWA-VM1 and DVWA-VM2
 
 4. Verifying Installation and Playbook
 
