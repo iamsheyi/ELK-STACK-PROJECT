@@ -162,7 +162,7 @@ The following screenshot displays the result of running `docker ps` after succes
 ## Target Machines & Beats
 
 This ELK server is configured to monitor the following machines:
-List the IP addresses of the machines you are monitoring 
+The IP addresses of the machines the ELK server is monitoring 
 DVWA-VM1: 10.0.0.5
 DVWA-VM2: 10.0.0.6
 DVWA-VM4: 10.1.0.4
